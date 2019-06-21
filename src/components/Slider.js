@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SliderUI from '@material-ui/lab/Slider';
 
 
-export class Slider extends Component {
+class Slider extends Component {
 
   handleChange = (event, newValue) => {
     console.log(newValue);
