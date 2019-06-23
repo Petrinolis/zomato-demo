@@ -5,3 +5,4 @@ export const UPDATE_COST = 'UPDATE_COST';
 export const UPDATE_RATING = 'UPDATE_RATING';
 export const UPDATE_LIST = 'UPDATE_LIST';
 export const LOAD_MORE = 'LOAD_MORE';
+export const LOADING = 'LOADING';
