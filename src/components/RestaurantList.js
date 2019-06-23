@@ -1,45 +1,22 @@
 import React, { Component } from 'react'
-import Zomato from 'zomato.js'
+import { connect } from 'react-redux';
+import { updateList, loadMore } from '../actions/updateList'  
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 
 
-export default class RestaurantList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: []
-    }
-  }
+class RestaurantList extends Component {
 
-  getData(zomato, start){
-    zomato.search({
-      city_id: 297,
-      start: start,
-      count: 20,
-    })
-    .then(data => {
-      console.log(data)
-      this.setState({ list: [...this.state.list, ...data.restaurants]})
-      if ( start <= 80) {
-        this.getData(zomato, start + 20)
-      }
-    })
-    .catch(err => { 
-      console.error(err)
-      return null
-    });
-  }
+  
 
   
   componentDidMount() {
-    const zomato = new Zomato('d9ab5b5022882f3c6585c36d1d1766bd');
-    this.getData(zomato, 0);
+    this.props.updateList()
   }
 
   render() {
-    let listItems = this.state.list.map(item => (
+    let listItems = this.props.list.restaurants.map(item => (
       <ListItem button key={item.id}>
          <ListItemText primary={item.name} />
       </ListItem>
@@ -57,3 +34,9 @@ export default class RestaurantList extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  list: state.list
+});
+
+export default connect(mapStateToProps, {updateList, loadMore })(RestaurantList);
