@@ -2,7 +2,7 @@ import { UPDATE_COST, UPDATE_RATING } from '../actions/types'
 
 const initialState = {
   rating: [0, 5],
-  cost: [0, 5],
+  cost: [1, 4],
 }
 
 export default function(state = initialState, action) {

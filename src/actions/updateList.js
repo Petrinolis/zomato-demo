@@ -13,11 +13,12 @@ export const updateList = () => async (dispatch, getState) => {
     category: categoryIds,
     cuisines: cuisineIds,
   })
-  .then(data => 
-    dispatch({
-      type: UPDATE_LIST,
-      restaurants: data.restaurants
-    })
+  .then(data => {
+      dispatch({
+        type: UPDATE_LIST,
+        restaurants: data.restaurants,
+      })
+    }       
   )
 } 
 

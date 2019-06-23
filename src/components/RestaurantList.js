@@ -8,27 +8,29 @@ import ListItemText from '@material-ui/core/ListItemText'
 
 class RestaurantList extends Component {
 
-  
-
-  
   componentDidMount() {
     this.props.updateList()
   }
 
   render() {
     let listItems = this.props.list.restaurants.map(item => (
-      <ListItem button key={item.id}>
+      <ListItem button key={item.id} style={{borderTop: 'solid 1px #a2a1a1'}}>
          <ListItemText primary={item.name} />
       </ListItem>
     ));
 
     return (
       <List style={{
-        maxHeight: '300px', 
+        height: '300px', 
         width:'300px', 
         overflowX:'hidden', 
-        overflowY: 'auto' }} 
+        overflowY: 'auto',
+        border: 'solid 1px #a2a1a1',
+       }} 
       >  
+        <ListItem>
+          <ListItemText secondary={'RESULTS'} />
+        </ListItem>
         {listItems}
       </List>
     )

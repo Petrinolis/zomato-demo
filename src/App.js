@@ -8,18 +8,18 @@ import RestaurantList from './components/RestaurantList'
 import store from './store'
 import './App.css';
 
-
-
 class App extends Component {
    
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <CheckBoxes />
-          <Slider />
+        <div className="App" >  
+          <div style={{display: 'flex', justifyContent: 'space-around'}}>
+            <CheckBoxes />
+            <Slider />
+          </div>
+          <RestaurantList />
         </div>
-        <RestaurantList />
       </Provider>
      );
   } 

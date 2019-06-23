@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { updateCuisine, updateCategory, updateOtherCategory } from '../actions/updateCheckBoxes'  
 import Checkbox from '@material-ui/core/Checkbox';
+import Typography from '@material-ui/core/Typography'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 class CheckBoxes extends Component {
@@ -37,20 +38,28 @@ class CheckBoxes extends Component {
     return (
       <div style={{display: 'flex'}} >
         <div style={{display: 'flex', flexDirection: 'column'}}>
+          <Typography variant={'overline'} gutterBottom>
+            CATEGORY
+          </Typography>
           {catItems}
         </div>
-        <div style={{display: 'grid', gridTemplateColumns: 'auto auto auto'}}>
-          {cuisineItems}
-          <FormControlLabel 
-            control ={
-              <Checkbox    
-                checked={this.props.checkBoxes.otherCuisines.checked}
-                onChange={this.props.updateOtherCategory.bind(this)}
-                color="primary"
-              />
-            }
-            label={this.props.checkBoxes.otherCuisines.name}
-          />
+        <div style={{display: 'flex', flexDirection: 'column'}} >
+        <Typography variant={'overline'} gutterBottom>
+            CUISINE
+          </Typography>
+          <div style={{display: 'grid', gridTemplateColumns: 'auto auto auto'}}>
+            {cuisineItems}
+            <FormControlLabel 
+              control ={
+                <Checkbox    
+                  checked={this.props.checkBoxes.otherCuisines.checked}
+                  onChange={this.props.updateOtherCategory.bind(this)}
+                  color="primary"
+                />
+              }
+              label={this.props.checkBoxes.otherCuisines.name}
+            />
+          </div>
         </div>
       </div>
     )
