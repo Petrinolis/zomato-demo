@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import Slider from './components/Slider';
 import CheckBoxes from './components/CheckBoxes';
 import RestaurantList from './components/RestaurantList'
+import Viewer from './components/Viewer'
 
 import store from './store'
 import './App.css';
@@ -18,7 +19,12 @@ class App extends Component {
             <CheckBoxes />
             <Slider />
           </div>
-          <RestaurantList />
+          <div 
+            style={{display: 'flex', backgroundColor: '#eaeaea', margin: '40px 0'}}
+          >
+            <RestaurantList />
+            <Viewer />
+          </div>
         </div>
       </Provider>
      );

@@ -44,7 +44,7 @@ class CheckBoxes extends Component {
           {catItems}
         </div>
         <div style={{display: 'flex', flexDirection: 'column'}} >
-        <Typography variant={'overline'} gutterBottom>
+          <Typography variant={'overline'} gutterBottom>
             CUISINE
           </Typography>
           <div style={{display: 'grid', gridTemplateColumns: 'auto auto auto'}}>
