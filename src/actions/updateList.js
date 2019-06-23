@@ -4,8 +4,8 @@ import Zomato from 'zomato.js'
 const zomato = new Zomato('d9ab5b5022882f3c6585c36d1d1766bd');
 
 export const updateList = () => async (dispatch, getState) => {
-  const cuisineIds = getState().checkBoxes.cuisine.map(item => item.id).toString()
-  const categoryIds = getState().checkBoxes.category.map(item => item.id).toString()
+  const cuisineIds = getState().checkBoxes.cuisine.map(item => item.checked ? item.id : '').toString()
+  const categoryIds = getState().checkBoxes.category.map(item => item.checked ? item.id : '').toString()
   zomato.search({
     city_id: 297,
     start: 0,

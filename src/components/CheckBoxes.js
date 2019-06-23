@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { updateCuisine, updateCategory, updateOtherCategory } from '../actions/updateCheckBoxes'  
+import { updateCuisine, updateCategory, updateOtherCategory } from '../actions/updateCheckBoxes' 
+import { updateList } from '../actions/updateList'
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 class CheckBoxes extends Component {
+  componentDidUpdate() {
+    this.props.updateList()
+  }
 
   render() {
     let catItems = this.props.checkBoxes.category.map( item => (
@@ -70,4 +74,4 @@ const mapStateToProps = state => ({
   checkBoxes: state.checkBoxes
 });
 
-export default connect(mapStateToProps, {updateCategory, updateCuisine, updateOtherCategory})(CheckBoxes);
+export default connect(mapStateToProps, {updateCategory, updateCuisine, updateOtherCategory, updateList})(CheckBoxes);

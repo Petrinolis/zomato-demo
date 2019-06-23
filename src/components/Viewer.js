@@ -5,14 +5,15 @@ class Viewer extends Component {
   render() {
     return (
       <div style={{display: 'flex', margin: '40px'}}>
-        <div style={{width:'400px', marginRight: '40px'}} >
+        <div style={{width:'600px', marginRight: '40px'}} >
           <img src={this.props.viewer.image} alt={'Restaurant'} />
         </div>
         <div style={{
           display: 'flex', 
           flexDirection: 'column', 
           justifyContent: 'space-between',
-          maxHeight: '350px' }}
+          maxHeight: '400px',
+          maxWidth: '500px' }}
         > 
           <div>
             <div className={'title'}>
