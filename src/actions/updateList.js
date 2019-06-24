@@ -65,7 +65,7 @@ export const loadMore = () => (dispatch, getState) => {
   .then(data => {
     dispatch({ 
       type: UPDATE_VISIBLE,
-      visible: getVisible([...getState().slider.cost, ...getState().slider.rating], data.restaurants)
+      visible: getVisible([...getState().slider.cost, ...getState().slider.rating], [...getState().list.restaurants, ...data.restaurants])
     })
     dispatch({
       type: LOAD_MORE,
