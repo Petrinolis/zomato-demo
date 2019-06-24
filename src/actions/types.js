@@ -4,6 +4,7 @@ export const UPDATE_OTHERCATEGORY = 'UPDATE_OTHERCATEGORY';
 export const UPDATE_COST = 'UPDATE_COST';
 export const UPDATE_RATING = 'UPDATE_RATING';
 export const UPDATE_LIST = 'UPDATE_LIST';
+export const UPDATE_VISIBLE = 'UPDATE_VISIBLE';
 export const LOAD_MORE = 'LOAD_MORE';
 export const LOADING = 'LOADING';
 export const UPDATE_VIEWER = 'UPDATE_VIEWER';

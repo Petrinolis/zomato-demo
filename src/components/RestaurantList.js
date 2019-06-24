@@ -17,18 +17,24 @@ class RestaurantList extends Component {
     this.props.updateList()
   }
 
+
   render() {
-    let listItems = this.props.list.restaurants.map(item => (
-      <ListItem 
-        button 
-        key={item.id} 
-        style={{borderTop: 'solid 1px #a2a1a1'}}
-        onClick={this.props.updateViewer.bind(this, item.id)}
-      >
-        <ListItemText primary={item.name} />
-      </ListItem>
-    ));
-    
+   
+    let listItems = []
+    this.props.list.restaurants.forEach((item, index) => {
+      if(this.props.list.visible[index]) {
+        listItems.push(
+          <ListItem 
+            button 
+            key={item.id} 
+            style={{borderTop: 'solid 1px #a2a1a1'}}
+            onClick={this.props.updateViewer.bind(this, item.id)}
+          >
+            <ListItemText primary={item.name} />
+          </ListItem>
+        )
+      }
+    });
 
     return (
       <List style={{

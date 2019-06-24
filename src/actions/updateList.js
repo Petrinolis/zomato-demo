@@ -1,7 +1,21 @@
-import { UPDATE_LIST, LOAD_MORE, LOADING, UPDATE_VIEWER } from './types'
+import { UPDATE_LIST, LOAD_MORE, LOADING, UPDATE_VIEWER, UPDATE_VISIBLE } from './types'
 import Zomato from 'zomato.js'
 
 const zomato = new Zomato('d9ab5b5022882f3c6585c36d1d1766bd');
+
+function getVisible(slider, restaurants) {
+  let visible = restaurants.map( item => {
+    if (
+      item.price_range >= slider[0] &&
+      item.price_range <= slider[1] &&
+      item.user_rating.aggregate_rating >= slider[2] && 
+      item.user_rating.aggregate_rating <= slider[3]
+    ) return 1
+    else 
+      return 0
+  })
+  return visible
+}
 
 export const updateList = () => async (dispatch, getState) => {
   const cuisineIds = getState().checkBoxes.cuisine.map(item => item.checked ? item.id : '').toString()
@@ -13,25 +27,28 @@ export const updateList = () => async (dispatch, getState) => {
     category: categoryIds,
     cuisines: cuisineIds,
   })
-  .then(data => {
-      dispatch({
-        type: UPDATE_LIST,
-        restaurants: data.restaurants,
-      })
-      dispatch({
-        type: UPDATE_VIEWER,
-        image: data.restaurants[0].featured_image,
-        name: data.restaurants[0].name,
-        address: data.restaurants[0].location.address + ' '  + 
-                 data.restaurants[0].location.locality_verbose,
-        booking: data.restaurants[0].has_table_booking,
-        delivery: data.restaurants[0].has_online_delivery,
-        cuisines: data.restaurants[0].cuisines,
-        phone: data.restaurants[0].phone_numbers,
-        hours: data.restaurants[0].timings,
-      })
-    }       
-  )
+  .then(data => { 
+    dispatch({ 
+      type: UPDATE_VISIBLE,
+      visible: getVisible([...getState().slider.cost, ...getState().slider.rating], data.restaurants)
+    })
+    dispatch({
+      type: UPDATE_LIST,
+      restaurants: data.restaurants,
+    })
+    dispatch({
+      type: UPDATE_VIEWER,
+      image: data.restaurants[0].featured_image,
+      name: data.restaurants[0].name,
+      address: data.restaurants[0].location.address + ' '  + 
+              data.restaurants[0].location.locality_verbose,
+      booking: data.restaurants[0].has_table_booking,
+      delivery: data.restaurants[0].has_online_delivery,
+      cuisines: data.restaurants[0].cuisines,
+      phone: data.restaurants[0].phone_numbers,
+      hours: data.restaurants[0].timings,
+    })
+  })
 } 
 
 export const loadMore = () => (dispatch, getState) => {
@@ -46,12 +63,15 @@ export const loadMore = () => (dispatch, getState) => {
     cuisines: cuisineIds,
   })
   .then(data => {
-      dispatch({
-        type: LOAD_MORE,
-        restaurants: data.restaurants,
-      })
-    }       
-  )
+    dispatch({ 
+      type: UPDATE_VISIBLE,
+      visible: getVisible([...getState().slider.cost, ...getState().slider.rating], data.restaurants)
+    })
+    dispatch({
+      type: LOAD_MORE,
+      restaurants: data.restaurants,
+    })
+  })
 }
 
 export const loading = (loading) => dispatch => {
